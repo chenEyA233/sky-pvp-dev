@@ -19,7 +19,7 @@
 package net.ccbluex.liquidbounce.features.misc.proxy
 
 import io.netty.handler.proxy.Socks5ProxyHandler
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.config.ConfigSystem
 import net.ccbluex.liquidbounce.config.types.Configurable
 import net.ccbluex.liquidbounce.config.types.ListValueType
@@ -59,14 +59,14 @@ object ProxyManager : Configurable("proxy"), EventListener {
                  forwardAuthentication: Boolean = false) {
         Proxy(host, port, credentials(username, password), forwardAuthentication).check(
             success = { proxy ->
-                Client.logger.info("Added proxy [${proxy.host}:${proxy.port}]")
+                SKYPVP.logger.info("Added proxy [${proxy.host}:${proxy.port}]")
                 proxies.add(proxy)
                 ConfigSystem.storeConfigurable(this)
 
                 EventManager.callEvent(ProxyAdditionResultEvent(proxy = proxy))
             },
             failure = {
-                Client.logger.error("Failed to check proxy", it)
+                SKYPVP.logger.error("Failed to check proxy", it)
 
                 EventManager.callEvent(ProxyAdditionResultEvent(error = it.message ?: "Unknown error"))
             }
@@ -80,7 +80,7 @@ object ProxyManager : Configurable("proxy"), EventListener {
             success = { newProxy ->
                 val isConnected = proxy == proxies[index]
 
-                Client.logger.info("Edited proxy [${proxy.host}:${proxy.port}]")
+                SKYPVP.logger.info("Edited proxy [${proxy.host}:${proxy.port}]")
                 proxies[index] = newProxy
                 ConfigSystem.storeConfigurable(this)
 
@@ -91,7 +91,7 @@ object ProxyManager : Configurable("proxy"), EventListener {
                 }
             },
             failure = {
-                Client.logger.error("Failed to check proxy", it)
+                SKYPVP.logger.error("Failed to check proxy", it)
 
                 EventManager.callEvent(ProxyEditResultEvent(error = it.message ?: "Unknown error"))
             }
@@ -102,13 +102,13 @@ object ProxyManager : Configurable("proxy"), EventListener {
         val proxy = proxies.getOrNull(index) ?: error("Invalid proxy index")
         proxy.check(
             success = { proxy ->
-                Client.logger.info("Checked proxy [${proxy.host}:${proxy.port}]")
+                SKYPVP.logger.info("Checked proxy [${proxy.host}:${proxy.port}]")
                 ConfigSystem.storeConfigurable(this)
 
                 EventManager.callEvent(ProxyCheckResultEvent(proxy = proxy))
             },
             failure = {
-                Client.logger.error("Failed to check proxy", it)
+                SKYPVP.logger.error("Failed to check proxy", it)
                 EventManager.callEvent(ProxyCheckResultEvent(proxy = proxy, error = it.message ?: "Unknown error"))
             }
         )

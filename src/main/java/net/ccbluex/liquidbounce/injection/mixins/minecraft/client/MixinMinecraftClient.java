@@ -20,7 +20,7 @@ package net.ccbluex.liquidbounce.injection.mixins.minecraft.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import net.ccbluex.liquidbounce.Client;
+import net.ccbluex.liquidbounce.SKYPVP;
 import net.ccbluex.liquidbounce.common.GlobalFramebuffer;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.events.*;
@@ -168,18 +168,18 @@ public abstract class MixinMinecraftClient {
             return;
         }
 
-        Client.INSTANCE.getLogger().debug("Modifying window title");
+        SKYPVP.INSTANCE.getLogger().debug("Modifying window title");
 
-        StringBuilder titleBuilder = new StringBuilder(Client.CLIENT_NAME);
+        StringBuilder titleBuilder = new StringBuilder(SKYPVP.CLIENT_NAME);
         titleBuilder.append(" v");
-        titleBuilder.append(Client.INSTANCE.getClientVersion());
+        titleBuilder.append(SKYPVP.INSTANCE.getClientVersion());
         titleBuilder.append(" ");
 
-        if (Client.IN_DEVELOPMENT) {
+        if (SKYPVP.IN_DEVELOPMENT) {
             titleBuilder.append("(dev) ");
         }
 
-        titleBuilder.append(Client.INSTANCE.getClientCommit());
+        titleBuilder.append(SKYPVP.INSTANCE.getClientCommit());
 
         titleBuilder.append(" | ");
 

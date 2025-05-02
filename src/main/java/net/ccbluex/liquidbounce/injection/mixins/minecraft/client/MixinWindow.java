@@ -18,7 +18,7 @@
  */
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.client;
 
-import net.ccbluex.liquidbounce.Client;
+import net.ccbluex.liquidbounce.SKYPVP;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.events.FrameBufferResizeEvent;
 import net.ccbluex.liquidbounce.event.events.ScaleFactorChangeEvent;
@@ -58,15 +58,15 @@ public class MixinWindow {
             return instance.getIcons(resourcePack);
         }
 
-        Client.INSTANCE.getLogger().debug("Loading client icons");
+        SKYPVP.INSTANCE.getLogger().debug("Loading client icons");
 
         // Find client icons
-        final InputStream stream16 = Client.class.getResourceAsStream("/resources/liquidbounce/icon_16x16.png");
-        final InputStream stream32 = Client.class.getResourceAsStream("/resources/liquidbounce/icon_32x32.png");
+        final InputStream stream16 = SKYPVP.class.getResourceAsStream("/resources/liquidbounce/icon_16x16.png");
+        final InputStream stream32 = SKYPVP.class.getResourceAsStream("/resources/liquidbounce/icon_32x32.png");
 
         // In case one of the icons was not found
         if (stream16 == null || stream32 == null) {
-            Client.INSTANCE.getLogger().error("Unable to find client icons.");
+            SKYPVP.INSTANCE.getLogger().error("Unable to find client icons.");
 
             // Load default icons
             return instance.getIcons(resourcePack);

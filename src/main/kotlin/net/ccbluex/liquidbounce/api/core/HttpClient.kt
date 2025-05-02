@@ -19,7 +19,7 @@
 package net.ccbluex.liquidbounce.api.core
 
 import kotlinx.coroutines.*
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.config.gson.util.decode
 import net.minecraft.client.texture.NativeImage
 import net.minecraft.client.texture.NativeImageBackedTexture
@@ -39,9 +39,9 @@ fun withScope(block: suspend CoroutineScope.() -> Unit) = scope.launch { block()
 
 object HttpClient {
 
-    val DEFAULT_AGENT = "${Client.CLIENT_NAME}/${Client.clientVersion}" +
-        " (${Client.clientCommit}, ${Client.clientBranch}, " +
-        "${if (Client.IN_DEVELOPMENT) "dev" else "release"}, ${System.getProperty("os.name")})"
+    val DEFAULT_AGENT = "${SKYPVP.CLIENT_NAME}/${SKYPVP.clientVersion}" +
+        " (${SKYPVP.clientCommit}, ${SKYPVP.clientBranch}, " +
+        "${if (SKYPVP.IN_DEVELOPMENT) "dev" else "release"}, ${System.getProperty("os.name")})"
 
     val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
     val FORM_MEDIA_TYPE = "application/x-www-form-urlencoded".toMediaType()

@@ -19,7 +19,7 @@
 
 package net.ccbluex.liquidbounce.common;
 
-import net.ccbluex.liquidbounce.Client;
+import net.ccbluex.liquidbounce.SKYPVP;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resource.metadata.TextureResourceMetadata;
@@ -50,7 +50,7 @@ public class ClientLogoTexture extends ReloadableTexture {
 
     @Override
     public TextureContents loadContents(ResourceManager resourceManager) {
-        try (var stream = Client.class.getResourceAsStream("/resources/liquidbounce/logo_banner.png")) {
+        try (var stream = SKYPVP.class.getResourceAsStream("/resources/liquidbounce/logo_banner.png")) {
             var nativeImage = NativeImage.read(Objects.requireNonNull(stream));
 
             return new TextureContents(nativeImage, new TextureResourceMetadata(true, false));

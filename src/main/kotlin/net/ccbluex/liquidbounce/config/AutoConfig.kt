@@ -20,7 +20,7 @@ package net.ccbluex.liquidbounce.config
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.api.core.AsyncLazy
 import net.ccbluex.liquidbounce.api.models.client.AutoSettings
 import net.ccbluex.liquidbounce.api.services.client.ClientApi
@@ -275,8 +275,8 @@ object AutoConfig {
         jsonObject.addProperty("author", author)
         jsonObject.addProperty("date", date)
         jsonObject.addProperty("time", time)
-        jsonObject.addProperty("clientVersion", Client.clientVersion)
-        jsonObject.addProperty("clientCommit", Client.clientCommit)
+        jsonObject.addProperty("clientVersion", SKYPVP.clientVersion)
+        jsonObject.addProperty("clientCommit", SKYPVP.clientCommit)
         mc.currentServerEntry?.let {
             jsonObject.addProperty("serverAddress", it.address.dropPort().rootDomain())
         }

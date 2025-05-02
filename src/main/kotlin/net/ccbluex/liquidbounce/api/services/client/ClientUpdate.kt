@@ -19,7 +19,7 @@
 package net.ccbluex.liquidbounce.api.services.client
 
 import com.vdurmont.semver4j.Semver
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.api.core.AsyncLazy
 import net.ccbluex.liquidbounce.utils.client.logger
 import java.text.SimpleDateFormat
@@ -28,7 +28,7 @@ import java.util.*
 object ClientUpdate {
 
     val gitInfo = Properties().also { properties ->
-        val inputStream = Client::class.java.classLoader.getResourceAsStream("git.properties")
+        val inputStream = SKYPVP::class.java.classLoader.getResourceAsStream("git.properties")
 
         if (inputStream != null) {
             properties.load(inputStream)
@@ -41,8 +41,8 @@ object ClientUpdate {
         runCatching {
             val newestBuild = runCatching {
                 ClientApi.requestNewestBuildEndpoint(
-                    branch = Client.clientBranch,
-                    release = !Client.IN_DEVELOPMENT
+                    branch = SKYPVP.clientBranch,
+                    release = !SKYPVP.IN_DEVELOPMENT
                 )
             }.onFailure { exception ->
                 logger.error("Unable to receive update information", exception)
@@ -50,7 +50,7 @@ object ClientUpdate {
 
             val newestSemVersion = Semver(newestBuild.lbVersion, Semver.SemverType.LOOSE)
 
-            val isNewer = if (Client.IN_DEVELOPMENT) { // check if new build is newer than current build
+            val isNewer = if (SKYPVP.IN_DEVELOPMENT) { // check if new build is newer than current build
                 val newestVersionDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(newestBuild.date)
                 val currentVersionDate =
                     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(gitInfo["git.commit.time"].toString())
@@ -58,7 +58,7 @@ object ClientUpdate {
                 newestVersionDate.after(currentVersionDate)
             } else {
                 // check if version number is higher than current version number (on release builds only!)
-                val clientSemVersion = Semver(Client.clientVersion, Semver.SemverType.LOOSE)
+                val clientSemVersion = Semver(SKYPVP.clientVersion, Semver.SemverType.LOOSE)
 
                 newestBuild.release && newestSemVersion.isGreaterThan(clientSemVersion)
             }

@@ -19,7 +19,7 @@
 @file:Suppress("NOTHING_TO_INLINE")
 package net.ccbluex.liquidbounce.utils.client.error
 
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.utils.client.browseUrl
 import net.ccbluex.liquidbounce.utils.client.error.errors.ClientError
 import net.ccbluex.liquidbounce.utils.client.mc
@@ -69,7 +69,7 @@ class ErrorHandler private constructor(
         }
     }
 
-    private inline val title get() = "${Client.CLIENT_NAME} Nextgen"
+    private inline val title get() = "${SKYPVP.CLIENT_NAME} Nextgen"
 
     private val builder = CurrentStringBuilder()
 
@@ -134,7 +134,7 @@ class ErrorHandler private constructor(
         """
             OS: ${System.getProperty("os.name")} (${System.getProperty("os.arch")})
             Java: ${System.getProperty("java.version")}
-            Client version: ${Client.clientVersion} (${Client.clientCommit})
+            Client version: ${SKYPVP.clientVersion} (${SKYPVP.clientCommit})
         """.trimIndent()
     )
 

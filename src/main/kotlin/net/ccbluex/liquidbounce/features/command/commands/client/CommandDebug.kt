@@ -27,7 +27,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.api.core.HttpClient
 import net.ccbluex.liquidbounce.api.core.HttpMethod
 import net.ccbluex.liquidbounce.api.core.asForm
@@ -92,11 +92,11 @@ object CommandDebug : CommandFactory {
         autoConfigPaste: String
     ) = JsonObject().apply {
         add("client", JsonObject().apply {
-            addProperty("name", Client.CLIENT_NAME)
-            addProperty("version", Client.clientVersion)
-            addProperty("commit", Client.clientCommit)
-            addProperty("branch", Client.clientBranch)
-            addProperty("development", Client.IN_DEVELOPMENT)
+            addProperty("name", SKYPVP.CLIENT_NAME)
+            addProperty("version", SKYPVP.clientVersion)
+            addProperty("commit", SKYPVP.clientCommit)
+            addProperty("branch", SKYPVP.clientBranch)
+            addProperty("development", SKYPVP.IN_DEVELOPMENT)
             addProperty("usesViaFabricPlus", usesViaFabricPlus)
         })
 

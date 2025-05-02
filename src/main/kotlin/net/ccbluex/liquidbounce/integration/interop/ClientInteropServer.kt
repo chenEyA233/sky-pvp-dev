@@ -20,7 +20,7 @@
 package net.ccbluex.liquidbounce.integration.interop
 
 import com.google.gson.JsonObject
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.config.ConfigSystem
 import net.ccbluex.liquidbounce.integration.interop.protocol.event.SocketEventListener
 import net.ccbluex.liquidbounce.integration.interop.protocol.rest.v1.registerInteropFunctions
@@ -101,9 +101,9 @@ object ClientInteropServer {
 
     @Suppress("UNUSED_PARAMETER")
     private fun getRootResponse(requestObject: RequestObject) = httpOk(JsonObject().apply {
-        addProperty("name", Client.CLIENT_NAME)
-        addProperty("version", Client.clientVersion)
-        addProperty("author", Client.CLIENT_AUTHOR)
+        addProperty("name", SKYPVP.CLIENT_NAME)
+        addProperty("version", SKYPVP.clientVersion)
+        addProperty("author", SKYPVP.CLIENT_AUTHOR)
     })
 
 }

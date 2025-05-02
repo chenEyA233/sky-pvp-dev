@@ -20,7 +20,7 @@
 
 package net.ccbluex.liquidbounce.utils.client
 
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.event.events.NotificationEvent
 import net.ccbluex.liquidbounce.features.command.Command
@@ -36,7 +36,7 @@ import org.apache.commons.lang3.StringUtils
 import org.apache.logging.log4j.Logger
 
 val logger: Logger
-    get() = Client.logger
+    get() = SKYPVP.logger
 
 val inGame: Boolean
     get() = MinecraftClient.getInstance()?.let { mc -> mc.player != null && mc.world != null } == true

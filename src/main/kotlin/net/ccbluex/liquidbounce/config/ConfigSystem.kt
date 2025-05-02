@@ -22,7 +22,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.config.gson.fileGson
 import net.ccbluex.liquidbounce.config.types.ChoiceConfigurable
 import net.ccbluex.liquidbounce.config.types.Configurable
@@ -48,7 +48,7 @@ object ConfigSystem {
 
     // Config directory folder
     val rootFolder = File(
-        mc.runDirectory, Client.CLIENT_NAME
+        mc.runDirectory, SKYPVP.CLIENT_NAME
     ).apply {
         // Check if there is already a config folder and if not create new folder
         // (mkdirs not needed - .minecraft should always exist)

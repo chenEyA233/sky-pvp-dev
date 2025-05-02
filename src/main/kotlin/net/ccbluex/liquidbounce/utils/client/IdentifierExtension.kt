@@ -1,7 +1,7 @@
 @file:Suppress("NOTHING_TO_INLINE")
 package net.ccbluex.liquidbounce.utils.client
 
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.minecraft.client.texture.NativeImage
 import net.minecraft.client.texture.NativeImageBackedTexture
 import net.minecraft.util.Identifier
@@ -11,7 +11,7 @@ import java.io.InputStream
  * @param path prefix /resources/liquidbounce/$path
  */
 inline fun Identifier.registerDynamicImageFromResources(path: String) {
-    with(Client.javaClass.getResourceAsStream("/resources/liquidbounce/$path")!!) {
+    with(SKYPVP.javaClass.getResourceAsStream("/resources/liquidbounce/$path")!!) {
         this@registerDynamicImageFromResources.registerDynamicImage(this)
     }
 }

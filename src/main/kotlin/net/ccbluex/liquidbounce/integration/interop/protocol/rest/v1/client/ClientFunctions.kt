@@ -21,7 +21,7 @@ package net.ccbluex.liquidbounce.integration.interop.protocol.rest.v1.client
 
 import com.google.gson.JsonObject
 import io.netty.handler.codec.http.FullHttpResponse
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.api.services.client.ClientUpdate.update
 import net.ccbluex.liquidbounce.utils.client.inGame
 import net.ccbluex.liquidbounce.utils.client.mc
@@ -38,9 +38,9 @@ import java.util.*
 @Suppress("UNUSED_PARAMETER")
 fun getClientInfo(requestObject: RequestObject) = httpOk(JsonObject().apply {
     addProperty("gameVersion", mc.gameVersion)
-    addProperty("clientVersion", Client.clientVersion)
-    addProperty("clientName", Client.CLIENT_NAME)
-    addProperty("development", Client.IN_DEVELOPMENT)
+    addProperty("clientVersion", SKYPVP.clientVersion)
+    addProperty("clientName", SKYPVP.CLIENT_NAME)
+    addProperty("development", SKYPVP.IN_DEVELOPMENT)
     addProperty("fps", mc.currentFps)
     addProperty("gameDir", mc.runDirectory.path)
     addProperty("inGame", inGame)
@@ -51,8 +51,8 @@ fun getClientInfo(requestObject: RequestObject) = httpOk(JsonObject().apply {
 // GET /api/v1/client/update
 @Suppress("UNUSED_PARAMETER")
 fun getUpdateInfo(requestObject: RequestObject) = httpOk(JsonObject().apply {
-    addProperty("development", Client.IN_DEVELOPMENT)
-    addProperty("commit", Client.clientCommit)
+    addProperty("development", SKYPVP.IN_DEVELOPMENT)
+    addProperty("commit", SKYPVP.clientCommit)
 
     val updateInfo = update ?: return@apply
     add("update", JsonObject().apply {
@@ -103,7 +103,7 @@ fun postBrowse(requestObject: RequestObject): FullHttpResponse {
 private val POSSIBLE_URL_TARGETS: Map<String, URI> = run {
     val properties = Properties()
 
-    properties.load(Client::class.java.getResourceAsStream("/resources/liquidbounce/client_urls.properties"))
+    properties.load(SKYPVP::class.java.getResourceAsStream("/resources/liquidbounce/client_urls.properties"))
 
     properties.stringPropertyNames().associateWith { URI(properties.getProperty(it)) }
 }

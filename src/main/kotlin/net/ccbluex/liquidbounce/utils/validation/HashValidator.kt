@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.utils.validation
 
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.config.gson.util.decode
 import net.ccbluex.liquidbounce.utils.client.logger
 import org.apache.commons.codec.digest.DigestUtils
@@ -57,7 +57,7 @@ object HashValidator {
             runCatching {
                 folderToDelete.deleteRecursively()
             }.onFailure {
-                Client.logger.error("Failed to delete ${folderToDelete.absolutePath}.", it)
+                SKYPVP.logger.error("Failed to delete ${folderToDelete.absolutePath}.", it)
             }
         })
     }

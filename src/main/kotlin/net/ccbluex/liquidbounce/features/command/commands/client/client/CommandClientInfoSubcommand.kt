@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.command.commands.client.client
 
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.features.command.builder.CommandBuilder
 import net.ccbluex.liquidbounce.utils.client.MessageMetadata
 import net.ccbluex.liquidbounce.utils.client.chat
@@ -12,15 +12,15 @@ object CommandClientInfoSubcommand {
         .begin("info")
         .handler { command, _ ->
             chat(
-                regular(command.result("clientName", variable(Client.CLIENT_NAME))),
+                regular(command.result("clientName", variable(SKYPVP.CLIENT_NAME))),
                 metadata = MessageMetadata(prefix = false)
             )
             chat(
-                regular(command.result("clientVersion", variable(Client.clientVersion))),
+                regular(command.result("clientVersion", variable(SKYPVP.clientVersion))),
                 metadata = MessageMetadata(prefix = false)
             )
             chat(
-                regular(command.result("clientAuthor", variable(Client.CLIENT_AUTHOR))),
+                regular(command.result("clientAuthor", variable(SKYPVP.CLIENT_AUTHOR))),
                 metadata = MessageMetadata(prefix = false)
             )
         }.build()

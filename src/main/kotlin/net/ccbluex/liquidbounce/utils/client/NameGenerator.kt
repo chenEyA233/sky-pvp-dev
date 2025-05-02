@@ -21,7 +21,7 @@ package net.ccbluex.liquidbounce.utils.client
 import com.google.common.math.IntMath
 import it.unimi.dsi.fastutil.chars.Char2CharArrayMap
 import it.unimi.dsi.fastutil.ints.IntCharPair
-import net.ccbluex.liquidbounce.Client
+import net.ccbluex.liquidbounce.SKYPVP
 import net.ccbluex.liquidbounce.utils.kotlin.component1
 import net.ccbluex.liquidbounce.utils.kotlin.component2
 import net.ccbluex.liquidbounce.utils.kotlin.subList
@@ -38,7 +38,7 @@ private val LEET_MAP = Char2CharArrayMap(
 private fun loadLines(name: String): List<String> {
     val resourceName = "/resources/liquidbounce/data/usernames/$name"
     val inputStream =
-        Client::class.java.getResourceAsStream(resourceName)
+        SKYPVP::class.java.getResourceAsStream(resourceName)
             ?: error("Failed to load resource $resourceName")
 
     return inputStream.bufferedReader().readLines()

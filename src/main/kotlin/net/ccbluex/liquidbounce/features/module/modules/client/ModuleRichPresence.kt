@@ -25,12 +25,12 @@ import com.jagrosh.discordipc.entities.RichPresence
 import com.jagrosh.discordipc.entities.pipe.PipeStatus
 import com.jagrosh.discordipc.exceptions.NoDiscordClientException
 import kotlinx.coroutines.Dispatchers
-import net.ccbluex.liquidbounce.Client
-import net.ccbluex.liquidbounce.Client.CLIENT_AUTHOR
-import net.ccbluex.liquidbounce.Client.CLIENT_NAME
-import net.ccbluex.liquidbounce.Client.clientBranch
-import net.ccbluex.liquidbounce.Client.clientCommit
-import net.ccbluex.liquidbounce.Client.clientVersion
+import net.ccbluex.liquidbounce.SKYPVP
+import net.ccbluex.liquidbounce.SKYPVP.CLIENT_AUTHOR
+import net.ccbluex.liquidbounce.SKYPVP.CLIENT_NAME
+import net.ccbluex.liquidbounce.SKYPVP.clientBranch
+import net.ccbluex.liquidbounce.SKYPVP.clientCommit
+import net.ccbluex.liquidbounce.SKYPVP.clientVersion
 import net.ccbluex.liquidbounce.api.core.AsyncLazy
 import net.ccbluex.liquidbounce.api.services.cdn.ClientCdn
 import net.ccbluex.liquidbounce.config.gson.util.json
@@ -51,9 +51,9 @@ val ipcConfiguration by AsyncLazy {
     runCatching {
         ClientCdn.requestDiscordConfiguration()
     }.onSuccess {
-        Client.logger.info("Successfully loaded Discord IPC configuration [${it.appID}].")
+        SKYPVP.logger.info("Successfully loaded Discord IPC configuration [${it.appID}].")
     }.onFailure {
-        Client.logger.error("Failed to load Discord IPC configuration.", it)
+        SKYPVP.logger.error("Failed to load Discord IPC configuration.", it)
     }.getOrNull()
 }
 
