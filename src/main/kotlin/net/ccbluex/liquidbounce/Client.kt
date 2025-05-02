@@ -7,7 +7,6 @@ package net.ccbluex.liquidbounce
  *
  *Hello, my followers~
  */
-class iuguduhg
 class SlienceFix
 public class Client{
     companion object {
@@ -16,6 +15,5 @@ public class Client{
         const val CLIENT_AUTHOR = "chenEyA"//作者
         const val TEXT = "SKY PVP Client | v1.1 | by:chenEyA"//完整版（测试，未使用）
         const val SlienceFix = "Hallo world! |"//你好，世界！
-        const val iuguduhg = "114514!!!"//114514
     }
 }
