@@ -1,1 +1,0 @@
-const val CLIENT_CDN = "https://cdn.liquidbounce.net"
