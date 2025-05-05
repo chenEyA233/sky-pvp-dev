@@ -29,7 +29,6 @@ import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.modes.C
 import net.ccbluex.liquidbounce.features.module.modules.movement.fly.ModuleFly
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.ModuleSpeed.OnlyInCombat.modes
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.ModuleSpeed.OnlyOnPotionEffect.potionEffects
-import net.ccbluex.liquidbounce.features.module.modules.movement.speed.ModuleSpeed.modes
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.SpeedCustom
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.SpeedLegitHop
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.SpeedSpeedYPort
@@ -38,7 +37,8 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.gri
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.hylex.SpeedHylexGround
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.hylex.SpeedHylexLowHop
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.intave.SpeedIntave14
-import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.ncp.SpeedNCP
+import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.intave.SpeedIntave14Fast
+import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.ncp.SpeedNCPHop
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.sentinel.SpeedSentinelDamage
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.spartan.SpeedSpartan524
 import net.ccbluex.liquidbounce.features.module.modules.movement.speed.modes.spartan.SpeedSpartan524GroundTimer
@@ -88,9 +88,10 @@ object ModuleSpeed : ClientModule("Speed", Category.MOVEMENT) {
         SpeedVulcanGround286(configurable),
         SpeedGrimCollide(configurable),
 
-        SpeedNCP(configurable),
+        SpeedNCPHop(configurable),
 
         SpeedIntave14(configurable),
+        SpeedIntave14Fast(configurable),
 
         SpeedHylexLowHop(configurable),
         SpeedHylexGround(configurable),

@@ -25,7 +25,6 @@ import net.ccbluex.liquidbounce.event.events.KeyboardKeyEvent
 import net.ccbluex.liquidbounce.event.events.MouseButtonEvent
 import net.ccbluex.liquidbounce.event.events.WorldChangeEvent
 import net.ccbluex.liquidbounce.event.handler
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleLeghtGUI
 import net.ccbluex.liquidbounce.features.module.modules.client.ModuleAutoConfig
 import net.ccbluex.liquidbounce.features.module.modules.client.ModuleLiquidChat
 import net.ccbluex.liquidbounce.features.module.modules.client.ModuleRichPresence
@@ -292,7 +291,6 @@ object ModuleManager : EventListener, Iterable<ClientModule> by modules {
             ModuleNoClip,
             ModuleNoJumpDelay,
             ModuleNoPush,
-            ModuleStuck,
             ModuleNoSlow,
             ModuleNoWeb,
             ModuleParkour,
@@ -300,6 +298,7 @@ object ModuleManager : EventListener, Iterable<ClientModule> by modules {
             ModuleSafeWalk,
             ModuleSneak,
             ModuleSpeed,
+            ModuleStuck,
             ModuleSprint,
             ModuleStep,
             ModuleReverseStep,
@@ -347,6 +346,7 @@ object ModuleManager : EventListener, Iterable<ClientModule> by modules {
             ModuleESP,
             ModuleLogoffSpot,
             ModuleFreeCam,
+            ModuleLeghtGUI,
             ModuleFreeLook,
             ModuleFullBright,
             ModuleHoleESP,
@@ -364,7 +364,6 @@ object ModuleManager : EventListener, Iterable<ClientModule> by modules {
             ModuleChams,
             ModuleBedPlates,
             ModuleNoBob,
-            ModuleItemPhysics,
             ModuleNoFov,
             ModuleNoHurtCam,
             ModuleNoSignRender,
@@ -385,7 +384,6 @@ object ModuleManager : EventListener, Iterable<ClientModule> by modules {
             ModuleZoom,
             ModuleItemChams,
             ModuleCrystalView,
-            ModuleLeghtGUI,
 
             // World
             ModuleAutoBuild,
@@ -399,7 +397,6 @@ object ModuleManager : EventListener, Iterable<ClientModule> by modules {
             ModuleAutoTrap,
             ModuleBlockTrap,
             ModuleNoSlowBreak,
-
             ModuleLiquidPlace,
             ModuleProjectilePuncher,
             ModuleScaffold,

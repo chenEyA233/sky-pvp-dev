@@ -1,3 +1,22 @@
+/*
+ * This file is part of LiquidBounce (https://github.com/CCBlueX/LiquidBounce)
+ *
+ * Copyright (c) 2015 - 2025 CCBlueX
+ *
+ * LiquidBounce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * LiquidBounce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with LiquidBounce. If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
 package net.ccbluex.liquidbounce
 
 import com.mojang.blaze3d.systems.RenderSystem
@@ -21,7 +40,6 @@ import net.ccbluex.liquidbounce.event.events.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.events.ClientStartEvent
 import net.ccbluex.liquidbounce.event.events.ScreenEvent
 import net.ccbluex.liquidbounce.event.handler
-import net.ccbluex.liquidbounce.features.Reconnect
 import net.ccbluex.liquidbounce.features.command.CommandManager
 import net.ccbluex.liquidbounce.features.cosmetic.ClientAccountManager
 import net.ccbluex.liquidbounce.features.cosmetic.CosmeticService
@@ -52,7 +70,7 @@ import net.ccbluex.liquidbounce.utils.aiming.RotationManager
 import net.ccbluex.liquidbounce.utils.block.ChunkScanner
 import net.ccbluex.liquidbounce.utils.client.InteractionTracker
 import net.ccbluex.liquidbounce.utils.client.PacketQueueManager
-import net.ccbluex.liquidbounce.utils.client.TpsObserver
+import net.ccbluex.liquidbounce.utils.client.ServerObserver
 import net.ccbluex.liquidbounce.utils.client.error.ErrorHandler
 import net.ccbluex.liquidbounce.utils.client.mc
 import net.ccbluex.liquidbounce.utils.combat.CombatManager
@@ -70,12 +88,25 @@ import org.apache.logging.log4j.LogManager
 import java.io.File
 import kotlin.time.measureTime
 
+/**
+ * LiquidBounce
+ *
+ * A free mixin-based injection hacked-client for Minecraft using FabricMC.
+ *
+ * @author kawaiinekololis (@team CCBlueX)
+ */
 object SKYPVP : EventListener {
+
+    /**
+     * CLIENT INFORMATION
+     *
+     * WARNING: Please read the GNU General Public License
+     */
     const val CLIENT_NAME = net.ccbluex.liquidbounce.Client.CLIENT_NAME
     const val CLIENT_AUTHOR = net.ccbluex.liquidbounce.Client.CLIENT_AUTHOR
-    const val SB = net.ccbluex.liquidbounce.Client.SlienceFix + "qwq"//我还是人吗？
+    const val SB = net.ccbluex.liquidbounce.Client.END
 
-    private object Client : Configurable("Client") {//渲染标题
+    private object Client : Configurable("Client") {
         val version = text("Version", net.ccbluex.liquidbounce.Client.CLIENT_VER.toString()).immutable()
         val commit = text("Commit", gitInfo["git.commit.id.abbrev"]?.let { SKYPVP.SB } ?: "unknown").immutable()
         val branch = text("Branch", gitInfo["git.branch"]?.toString() ?: "nextgen").immutable()
@@ -83,9 +114,14 @@ object SKYPVP : EventListener {
         init {
             ConfigSystem.root(this)
 
-            version.onChange {
-                ConfigSystem.backup("backup-${it}-${version.inner}.zip")
-                it
+            version.onChange { previousVersion ->
+                runCatching {
+                    ConfigSystem.backup("automatic_${previousVersion}-${version.inner}")
+                }.onFailure {
+                    logger.error("Unable to create backup", it)
+                }
+
+                previousVersion
             }
         }
     }
@@ -98,6 +134,7 @@ object SKYPVP : EventListener {
      * Defines if the client is in development mode.
      * This will enable update checking on commit time instead of semantic versioning.
      *
+     * TODO: Replace this approach with full semantic versioning.
      */
     const val IN_DEVELOPMENT = false
 
@@ -144,7 +181,11 @@ object SKYPVP : EventListener {
 
         // Do backup before loading configs
         if (!ConfigSystem.isFirstLaunch && !Client.jsonFile.exists()) {
-            ConfigSystem.backup("backup-unknown-${Client.version.inner}.zip")
+            runCatching {
+                ConfigSystem.backup("automatic_${Client.version.inner}")
+            }.onFailure {
+                logger.error("Unable to create backup", it)
+            }
         }
 
         // Load all configurations
@@ -186,14 +227,13 @@ object SKYPVP : EventListener {
         FriendManager
         InventoryManager
         WorldToScreen
-        Reconnect
         ActiveServerList
         ConfigSystem.root(ClientItemGroups)
         ConfigSystem.root(LanguageManager)
         ConfigSystem.root(ClientAccountManager)
         ConfigSystem.root(SpooferManager)
         PostRotationExecutor
-        TpsObserver
+        ServerObserver
         ItemImageAtlas
     }
 
@@ -304,6 +344,8 @@ object SKYPVP : EventListener {
                     DeepLearningEngine.init(task)
                     ModelHolster.load()
                 }.onFailure { exception ->
+                    task.subTasks.clear()
+
                     // LiquidBounce can still run without deep learning,
                     // and we don't want to crash the client if it fails.
                     logger.info("Failed to initialize deep learning.", exception)

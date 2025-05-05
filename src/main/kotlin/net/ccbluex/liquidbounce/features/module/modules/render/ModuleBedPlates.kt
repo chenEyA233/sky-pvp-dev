@@ -25,7 +25,7 @@ import net.ccbluex.liquidbounce.event.handler
 import net.ccbluex.liquidbounce.features.module.Category
 import net.ccbluex.liquidbounce.features.module.ClientModule
 import net.ccbluex.liquidbounce.render.FontManager
-import net.ccbluex.liquidbounce.render.engine.Color4b
+import net.ccbluex.liquidbounce.render.engine.type.Color4b
 import net.ccbluex.liquidbounce.render.renderEnvironmentForGUI
 import net.ccbluex.liquidbounce.utils.block.*
 import net.ccbluex.liquidbounce.utils.inventory.Slots
@@ -155,7 +155,7 @@ object ModuleBedPlates : ClientModule("BedPlates", Category.RENDER) {
                             val defaultState = it.block.defaultState
                             val color =
                                 if (highlightUnbreakable && defaultState.isToolRequired
-                                    && Slots.Hotbar.findSlotIndex { s -> s.isSuitableFor(defaultState) } == null) {
+                                    && Slots.Hotbar.findSlot { s -> s.isSuitableFor(defaultState) } == null) {
                                     Color4b.RED
                                 } else {
                                     Color4b.WHITE

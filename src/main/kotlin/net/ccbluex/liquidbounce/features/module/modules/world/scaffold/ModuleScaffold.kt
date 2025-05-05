@@ -45,7 +45,7 @@ import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.technique
 import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.techniques.normal.ScaffoldDownFeature
 import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.techniques.normal.ScaffoldEagleFeature
 import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.tower.*
-import net.ccbluex.liquidbounce.render.engine.Color4b
+import net.ccbluex.liquidbounce.render.engine.type.Color4b
 import net.ccbluex.liquidbounce.utils.aiming.RotationManager
 import net.ccbluex.liquidbounce.utils.aiming.RotationsConfigurable
 import net.ccbluex.liquidbounce.utils.aiming.utils.withFixedYaw
@@ -142,7 +142,6 @@ object ModuleScaffold : ClientModule("Scaffold", Category.WORLD) {
                 blockPos.copy(y = startY - 1)
             }
         }),
-
         JUMP("On for jump", { blockPos ->
             if (player.velocity.y == -0.01 && jumps >= 3) {
                 jumps = 2
